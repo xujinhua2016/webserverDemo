@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>config</title>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">   
+	<style type="text/css">
+		body{ font-family: 'Microsoft YaHei';}
+		/*.panel-body{ padding: 0; }*/
+	</style>
+</head>
+<body>
+<div class="jumbotron">
+	<div class="container">
+		<h2>绿耳电池巡检仪监控系统</h1>
+  		<h3>——V1.0</h3>
+  		
+	</div>
+</div>
+<div class="container">
+	<div class="main">
+		<div class="row">
+			<!-- 左侧内容 -->
+			<div class="col-md-3">
+				<div class="list-group">
+					<a href="userinfo.html" class="list-group-item text-center ">用户信息</a>
+					<a href="data.html" class="list-group-item text-center" id="cus_mor">监控数据</a>
+					<a href="warning.html" class="list-group-item text-center" id="cus_warn">报警查询</a>
+					<a href="history.html" class="list-group-item text-center" id="cus_hty">历史曲线</a>
+					<a href="status.html" class="list-group-item text-center" id="cus_stat">状态查询</a>
+					<a href="config.html" class="list-group-item text-center active" id="cus_conf">参数配置</a>
+					<a href="help.html" class="list-group-item text-center" id="cus_help">帮助信息</a>
+					<a href="connect.html" class="list-group-item text-center" id="cus_conn">联系我们</a>
+				</div>
+			</div>
+			<!-- 右侧内容 -->
+			<div class="col-md-9">
+				<!-- 成功提示框 -->
+				<!-- <div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<strong>查询成功！</strong> 操作成功提示
+				</div>
+				失败提示框
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<strong>失败！</strong> 操作失败提示
+				</div> --> 
+				<!-- 自定义内容 -->
+				<div class="panel panel-default">
+					<div class="panel-heading">参数配置</div>
+					<div class="panel-body">
+					<form action="" class="form-horizontal" role="form" method="post">
+					<input type="hidden" name="_token" value="abmzuNCegKdnOWsBIY7BbCUDEnK4GHuoieHpfh9C">
+						<ul>
+							<li>
+							Modbus地址 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="user_name"  placeholder="001" value="001" />
+								<span><i class="fa fa-user"></i></span>
+							</li>
+							<br>
+							<li>
+							Modbus波特率&nbsp&nbsp&nbsp&nbsp：<input type="text" name="user_name" class="text" value="19200" />
+								<span><i class="fa fa-user"></i></span>
+							</li>
+							<br>
+							<li>
+							单体电池最高电压：<input type="text" name="user_name" class="text" value="2.5" />
+								<span><i class="fa fa-user"></i>建议2.5V</span>
+							</li>
+							<br>
+							<li>
+							单体电池最低电压：<input type="text" name="user_name" class="text" value="1.8" />
+								<span><i class="fa fa-user"></i>建议1.8V</span>
+							</li>
+							<br>
+							<li>
+							单体电池最高内阻：<input type="text" name="user_name" class="text" value="2" />
+								<span><i class="fa fa-user"></i>建议2mΩ</span>
+							</li>
+							<br>
+							<li>
+							电池组最高电压&nbsp&nbsp&nbsp：<input type="text" name="user_name" class="text" value="56" />
+								<span><i class="fa fa-user"></i>建议56V</span>
+							</li>
+							<br>
+							<li>
+							电池组最低电压&nbsp&nbsp&nbsp：<input type="text" name="user_name" class="text" value="40" />
+								<span><i class="fa fa-user"></i>建议40V</span>
+							</li>
+							<br>
+							<li>
+							充电电流最大值&nbsp&nbsp&nbsp：<input type="text" name="user_name" class="text" value="20" />
+								<span><i class="fa fa-user"></i>建议20A</span>
+							</li>
+							<br>
+							<li>
+							放电电流最大值&nbsp&nbsp&nbsp：<input type="text" name="user_name" class="text" value="20" />
+								<span><i class="fa fa-user"></i>建议20A</span>
+							</li>
+							<br>
+							<li>
+							工作环境最高温度：<input type="text" name="user_name" class="text" value="50" />
+								<span><i class="fa fa-user"></i>建议50°C</span>
+							</li>
+							<br>
+							<li>
+							工作环境最低温度：<input type="text" name="user_name" class="text" value="-10" />
+								<span><i class="fa fa-user"></i>建议-10°C</span>
+							</li>
+							<br>
+							<li>
+								<input type="submit" value="提交"/>
+							</li>
+						</ul>
+			</form>
+				
+					</div>
+			  	</div>
+			</div>
+<!-- 尾部 -->
+<div class="jumbotron" style=" margin-bottom:0;margin-top:650px;">
+	<div class="container">
+	<span>&copy; 上海绿耳新能源科技有限公司</span>
+	</div>
+</div>
+
+
+	<script src="static/js/jquery-3.1.0.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>

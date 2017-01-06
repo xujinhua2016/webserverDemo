@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>history</title>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">   
+	<style type="text/css">
+		body{ font-family: 'Microsoft YaHei';}
+
+		/*.panel-body{ padding: 0; }*/
+
+		.redcolor{
+			width: 30px;
+			height:30px;
+			background: yellow;
+			float:left;
+			margin: 2px;
+			border: 2px solid black;}
+		.greencolor{
+			width: 30px;
+			height:30px;
+			background: pink;
+			float: left;
+			margin: 2px;
+		border: 2px solid black;}
+
+		.bluecolor{
+			width: 30px;
+			height:30px;
+			background: blue;
+			float: left;
+			margin: 2px;
+		border: 2px solid black;}
+		
+		.redcolor1{
+			width: 50px;
+			height:30px;
+			background: red;
+			float:left;
+			margin: 2px;
+			border: 2px solid black;}
+		.greencolor1{
+			width: 50px;
+			height:30px;
+			background: green;
+			float: left;
+			margin: 2px;
+		border: 2px solid black;}
+
+		.bluecolor1{
+			width: 50px;
+			height:30px;
+			background: blue;
+			float: left;
+			margin: 2px;
+		border: 2px solid black;}
+
+		.text{
+			width: 50px;
+			height:30px;
+			color: red;
+			float: left;
+			}
+	</style>
+	<script type="text/javascript" src="static/js/Chart.js""></script>
+	
+</head>
+<body>
+<div class="jumbotron">
+	<div class="container">
+		<h2>绿耳电池巡检仪监控系统</h1>
+  		<h3>——V1.0</h3>
+  		
+	</div>
+</div>
+<div class="container">
+	<div class="main">
+		<div class="row">
+			<!-- 左侧内容 -->
+			<div class="col-md-3">
+				<div class="list-group">
+					<a href="userinfo.html" class="list-group-item text-center ">用户信息</a>
+					<a href="data.html" 	class="list-group-item text-center " id="cus_mor">监控数据</a>
+					<a href="warning.html"  class="list-group-item text-center" id="cus_warn">报警查询</a>
+					<a href="history.html"  class="list-group-item text-center active" id="cus_hty">历史曲线</a>
+					<a href="status.html" 	class="list-group-item text-center" id="cus_stat">状态查询</a>
+					<a href="config.html" 	class="list-group-item text-center" id="cus_conf">参数配置</a>
+					<a href="help.html" 	class="list-group-item text-center " id="cus_help">帮助信息</a>
+					<a href="connect.html"  class="list-group-item text-center" id="cus_conn">联系我们</a>
+				</div>
+			</div>
+			<!-- 右侧内容 -->
+			<div class="col-md-9">
+				<!-- 成功提示框 -->
+				<!-- <div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<strong>查询成功！</strong> 操作成功提示
+				</div>
+				失败提示框
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<strong>失败！</strong> 操作失败提示
+				</div> --> 
+				<!-- 自定义内容 -->
+				<div class="panel panel-default">
+					
+					
+					<div id="div1">
+						<center><div class="panel-heading">历史数据查询</div></center>
+					</div>
+	<div style="width:100%">
+			<div>
+				<center><canvas id="canvas" height="500" width="1000"></canvas></center>
+			</div>
+		</div>
+
+
+	<script>
+		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+		var lineChartData = {
+			labels : ["January","February","March","April","May","June","July"],
+			datasets : [
+				{
+					label: "My First dataset",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+				},
+				{
+					label: "My Second dataset",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(151,187,205,1)",
+					data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+				}
+			]
+
+		}
+
+	window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myLine = new Chart(ctx).Line(lineChartData, {
+			responsive: true
+		});
+	}
+
+
+	</script>
+
+	<div id="div1">
+		<div id="res01" class="redcolor">01#</div>
+			<div id="res02" class="greencolor">02#</div>
+			<div id="res03" class="greencolor">03#</div>
+			<div id="res04" class="greencolor">04#</div>
+			<div id="res05" class="greencolor">05#</div>
+			<div id="res06" class="greencolor">06#</div>
+			<div id="res07" class="greencolor">07#</div>
+			<div id="res08" class="greencolor">08#</div>
+			<div id="res09" class="greencolor">09#</div>
+			<div id="res10" class="greencolor">10#</div>
+			<div id="res11" class="greencolor">11#</div>
+			<div id="res12" class="greencolor">12#</div>
+			<div id="res13" class="greencolor">13#</div>
+			<div id="res14" class="greencolor">14#</div>
+			<div id="res15" class="greencolor">15#</div>
+			<div id="res16" class="greencolor">16#</div>
+			<div id="res17" class="greencolor">17#</div>
+			<div id="res18" class="greencolor">18#</div>
+			<div id="res19" class="greencolor">19#</div>
+			<div id="res20" class="greencolor">20#</div>
+			<div id="res21" class="greencolor">21#</div>
+			<div id="res22" class="greencolor">22#</div>
+			<div id="res23" class="greencolor">23#</div>
+			<div id="res24" class="greencolor">24#</div>
+			<span>&nbsp</span>
+					</div>
+				
+			</div>
+<!-- 尾部 -->
+<div class="jumbotron" style=" margin-bottom:0;margin-top:200px;">
+	<div class="container">
+	<center><span>&copy; 上海绿耳新能源科技有限公司</span></center>
+	</div>
+</div>
+
+	<script src="static/js/jquery-3.1.0.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>

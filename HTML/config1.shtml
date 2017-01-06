@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>config</title>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">   
+	<style type="text/css">
+		body{ font-family: 'Microsoft YaHei';}
+		/*.panel-body{ padding: 0; }*/
+	</style>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h2>绿耳电池巡检仪监控系统</h1>
+				<h3>——V1.0</h3>
+
+			</div>
+		</div>
+		<div class="container">
+			<div class="main">
+				<div class="row">
+					<!-- 左侧内容 -->
+					<div class="col-md-3">
+						<div class="list-group">
+							<a href="userinfo.html" class="list-group-item text-center ">用户信息</a>
+							<a href="data.html" class="list-group-item text-center" id="cus_mor">监控数据</a>
+							<a href="warning.html" class="list-group-item text-center" id="cus_warn">报警查询</a>
+							<a href="history.html" class="list-group-item text-center" id="cus_hty">历史曲线</a>
+							<a href="status.html" class="list-group-item text-center" id="cus_stat">状态查询</a>
+							<a href="config.html" class="list-group-item text-center active" id="cus_conf">参数配置</a>
+							<a href="help.html" class="list-group-item text-center" id="cus_help">帮助信息</a>
+							<a href="connect.html" class="list-group-item text-center" id="cus_conn">联系我们</a>
+						</div>
+					</div>
+					<!-- 右侧内容 -->
+					<div class="col-md-9">
+						<div class="panel panel-default">
+							<div class="panel-heading">参数配置</div>
+							<div class="panel-body">
+								<form action="" class="form-horizontal" role="form" method="post">
+									<div class="form-group">
+										<label for="inputModbusAdd" class="col-md-3 control-label">Modbus地址</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputModbusAdd" placeholder="001">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputModbusSed" class="col-md-3 control-label">Modbus波特率</label>
+										<div class="col-md-5">
+											<!-- <input type="text" class="form-control" id="inputModbusSed" placeholder="19200"> -->
+											<select name="" id="inputModbusSed" class="form-control">
+												<option value="">19200</option>
+												<option value="">9600</option>
+												<option value="">4800</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputSigBatVolH" class="col-md-3 control-label">单体电池最高电压</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputSigBatVolH" placeholder="2.5V">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputSigBatVolL" class="col-md-3 control-label">单体电池最低电压</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputSigBatVolL" placeholder="1.8V">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputSigBatResH" class="col-md-3 control-label">单体电池最高内阻</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputSigBatResH" placeholder="2mΩ">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputGrpBatVolH" class="col-md-3 control-label">电池组最高电压</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputGrpBatVolH" placeholder="56V">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputGrpBatVolL" class="col-md-3 control-label">电池组最低电压</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputGrpBatVolL" placeholder="40V">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputDcgCurH" class="col-md-3 control-label">充电电流最大值</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputDcgCurH" placeholder="20A">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputCgCurH" class="col-md-3 control-label">放电电流最大值</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputCgCurH" placeholder="20A">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputEnvTempH" class="col-md-3 control-label">工作环境最高温度</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputEnvTempH" placeholder="50°C">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputEnvTempL" class="col-md-3 control-label">工作环境最低温度</label>
+										<div class="col-md-5">
+											<input type="text" class="form-control" id="inputEnvTempL" placeholder="-10°C">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-offset-3 col-sm-5">
+											<button class="btn btn-default">提交</button>
+										</div>
+									</div>
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部 -->
+	<div class="jumbotron" style=" margin-bottom:0;margin-top:100px;">
+		<div class="container">
+			<span>&copy; 上海绿耳新能源科技有限公司</span>
+		</div>
+	</div>
+
+
+	<script src="static/js/jquery-3.1.0.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>

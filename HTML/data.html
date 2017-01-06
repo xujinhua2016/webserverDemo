@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>data</title>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">   
+	<style type="text/css">
+		body{ font-family: 'Microsoft YaHei';}
+		/*.panel-body{ padding: 0; }*/
+	</style>
+	<script type="text/javascript" src="static/js/Chart.js"></script>
+	
+</head>
+<body>
+<div class="jumbotron">
+	<div class="container">
+		<h2>绿耳电池巡检仪监控系统</h1>
+  		<h3>——V1.0</h3>
+  		
+	</div>
+</div>
+<div class="container">
+	<div class="main">
+		<div class="row">
+			<!-- 左侧内容 -->
+			<div class="col-md-3">
+				<div class="list-group">
+					<a href="userinfo.html" class="list-group-item text-center ">用户信息</a>
+					<a href="data.html" class="list-group-item text-center active" id="cus_mor">监控数据</a>
+					<a href="warning.html" class="list-group-item text-center" id="cus_warn">报警查询</a>
+					<a href="history.html" class="list-group-item text-center" id="cus_hty">历史曲线</a>
+					<a href="status.html" class="list-group-item text-center" id="cus_stat">状态查询</a>
+					<a href="config.html" class="list-group-item text-center" id="cus_conf">参数配置</a>
+					<a href="help.html" class="list-group-item text-center" id="cus_help">帮助信息</a>
+					<a href="connect.html" class="list-group-item text-center" id="cus_conn">联系我们</a>
+				</div>
+			</div>
+			<!-- 右侧内容 -->
+			<div class="col-md-9">
+				<div class="panel panel-default">
+					
+					
+					<div id="div1">
+								<center><div class="panel-heading">电池电压</div></center>
+								<canvas id="myChart" width="800" height="300"></canvas>
+								
+								<center><div class="panel-heading">电池内阻</div></center>
+								<canvas id="myChart1" width="800" height="300"></canvas>	
+					</div>
+
+
+
+				<script>
+
+						var displayVoltData = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+						var displayResData = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,116,17,18,19,20,21,22,23,24];
+							
+						var ctx = document.getElementById("myChart").getContext('2d');
+						var ctx1 = document.getElementById("myChart1").getContext('2d');
+						var data = {
+							labels : ["1#","2#","3#","4#","5#","6#","7#","8#","9#","10#","11#","12#","13#","14#","15#","16#",
+										"17#","18#","19#","20#","21#","22#","23#","24#"],
+							datasets : [
+								{
+									fillColor : "rgba(220,220,220,0.5)",
+									strokeColor : "rgba(220,220,220,1)",
+									data : displayVoltData
+								}
+							]
+						}
+						var data1 = {
+							labels : ["1#","2#","3#","4#","5#","6#","7#","8#","9#","10#","11#","12#","13#","14#","15#","16#",
+										"17#","18#","19#","20#","21#","22#","23#","24#"],
+							datasets : [
+								{
+									fillColor : "rgba(151,187,205,0.5)",
+									strokeColor : "rgba(151,187,205,1)",
+									//data : [0.84,19.7,1.4,2.5,1.6,4.3,1.1,0.5,2.8,9.4,
+									//5.9,6.4,8.2,7.3,1.6,4.3,1.1,0.5,2.8,9.4,5.9,6.4,8.2,7.3]
+									data : displayResData
+								}
+							]
+						}
+						var myChartLine = new Chart(ctx).Bar(data,{scaleLabel : "<%=value%>mV",});
+						var myChartLine1 = new Chart(ctx1).Bar(data1,{scaleLabel : "<%=value%>mΩ",});
+				</script>
+							
+					<!-- <div class="panel-body">
+					<center><form action="" method="post">
+					<input type="hidden" name="_token" value="abmzuNCegKdnOWsBIY7BbCUDEnK4GHuoieHpfh9C">
+						<ul>
+							<li>
+							用户名：<input type="text" name="user_name" class="text"/>
+								<span><i class="fa fa-user"></i></span>
+							</li> -->
+
+							<!-- <li>
+							&nbsp用&nbsp户&nbsp名&nbsp：<input type="text" name="user_name" class="text"  />
+								<span><i class="fa fa-user"></i></span>
+							</li>
+							<br>
+							<li>
+							密&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp码&nbsp：<input type="password" name="user_pass" class="text"  />
+								<span><i class="fa fa-lock"></i></span>
+							</li>
+							<br>
+							
+							<li>
+								<input type="submit" value="登陆"/>
+							</li>
+						</ul>
+			</form></center> --> 
+						<ul>
+							<li>
+								<input type="submit" value="内阻测试"/>
+							</li>
+						</ul>
+					</div>
+			  	</div>
+			</div>
+<!-- 尾部 -->
+<div class="jumbotron" style=" margin-bottom:0;margin-top:200px;">
+	<div class="container">
+	<center><span>&copy; 上海绿耳新能源科技有限公司</span></center>
+	</div>
+</div>
+
+	<script src="static/js/jquery-3.1.0.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>

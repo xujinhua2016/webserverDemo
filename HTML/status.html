@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>status</title>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">   
+	<style type="text/css">
+		body{ font-family: 'Microsoft YaHei';}
+		/*.panel-body{ padding: 0; }*/
+		.y1{
+			color: green;
+		}
+		.n1{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h2>绿耳电池巡检仪监控系统</h1>
+				<h3>——V1.0</h3>
+
+			</div>
+		</div>
+		<div class="container">
+			<div class="main">
+				<div class="row">
+					<!-- 左侧内容 -->
+					<div class="col-md-3">
+						<div class="list-group">
+							<a href="userinfo.html" class="list-group-item text-center ">用户信息</a>
+							<a href="data.html" class="list-group-item text-center" id="cus_mor">监控数据</a>
+							<a href="warning.html" class="list-group-item text-center" id="cus_warn">报警查询</a>
+							<a href="history.html" class="list-group-item text-center" id="cus_hty">历史曲线</a>
+							<a href="status.html" class="list-group-item text-center active" id="cus_stat">状态查询</a>
+							<a href="config.html" class="list-group-item text-center" id="cus_conf">参数配置</a>
+							<a href="help.html" class="list-group-item text-center" id="cus_help">帮助信息</a>
+							<a href="connect.html" class="list-group-item text-center" id="cus_conn">联系我们</a>
+						</div>
+					</div>
+					<!-- 右侧内容 -->
+					<div class="col-md-9">
+						<!-- 自定义内容 -->
+						<div class="panel panel-default">
+							<center><div class="panel-heading">状态查询</div></center>
+							<div class="panel-body">
+								<form action="" method="post">
+									<input type="hidden" name="_token" value="abmzuNCegKdnOWsBIY7BbCUDEnK4GHuoieHpfh9C">
+									<ul>
+									<!-- <li>
+									用户名：<input type="text" name="user_name" class="text"/>
+										<span><i class="fa fa-user"></i></span>
+									</li> -->
+
+									<li>
+										数据采集1状态：<span id="c1" class="y1">正常</span>
+									</li>
+									<br>
+									<li>
+										数据采集2状态：<span id="c2" class="y1">正常</span>
+									</li>
+									<br>
+									<li>
+										数据采集3状态：<span id="c3" class="n1">不正常</span>
+									</li>
+									<br>
+									<li>
+										数据采集4状态：<span id="c4" class="y1">正常</span>
+									</li>
+									<br>
+									<li>
+										电流模块状态：<span id="c5" class="y1">正常</span>
+									</li>
+									<br>
+
+									<li>
+										系统环境温度：<span id="temp" class="y1">28.5°C</span>
+									</li>
+									<br>
+
+									<li>
+										充放电流大小：<span id="curren" class="y1">+2A</span>&nbsp&nbsp&nbsp +：充电&nbsp&nbsp -：放电
+									</li>
+									<br>
+
+								</ul>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部 -->
+	<div class="jumbotron" style=" margin-bottom:0;margin-top:100px;">
+		<div class="container">
+			<span>&copy; 上海绿耳新能源科技有限公司</span>
+		</div>
+	</div>s
+
+
+	<script src="static/js/jquery-3.1.0.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>
