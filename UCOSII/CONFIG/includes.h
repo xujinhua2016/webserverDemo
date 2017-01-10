@@ -24,22 +24,6 @@
 
 #include <stm32f4xx.h>	    
 
-///////////////////////////////////////////////////
-
-/*
-*********************************************************************************************************
-*                                         STANDARD LIBRARIES
-*********************************************************************************************************
-*/
-
-#include  "stdarg.h"
-#include  "string.h"
-#include  "stdio.h"
-#include  "ctype.h"
-#include  "stdlib.h"
-#include  "math.h"
-
-
 /*
 *********************************************************************************************************
 *                                              APP / BSP
@@ -58,19 +42,23 @@
 #include  "bsp_key.h" 
 
 #include  "bsp_mb.h"
-#include "bsp_mb_timer.h"
+#include  "bsp_mb_timer.h"
 #include  "bsp_mb_usart.h"
-#include "bsp_mb_crc.h"
+#include  "bsp_mb_crc.h"
 
+/*
+*********************************************************************************************************
+*                                         STANDARD LIBRARIES
+*********************************************************************************************************
+*/
 
-//#include "lwip_comm.h"
-//#include "LAN8720.h"
-//#include "timer.h"
-//#include "sram.h"
-//#include "malloc.h"
-//#include "lwip_comm.h"
-//#include "lwipopts.h"
-//#include "httpd.h"
+#include  "stdarg.h"
+#include  "string.h"
+#include  "stdio.h"
+#include  "ctype.h"
+#include  "stdlib.h"
+#include  "math.h"
+
 
 
 #endif

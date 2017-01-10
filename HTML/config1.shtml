@@ -40,18 +40,17 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">参数配置</div>
 							<div class="panel-body">
-								<form action="" class="form-horizontal" role="form" method="post">
+								<form action="/ConfigPara.cgi" class="form-horizontal" id="confParaForm" role="form" method="get">
 									<div class="form-group">
 										<label for="inputModbusAdd" class="col-md-3 control-label">Modbus地址</label>
 										<div class="col-md-5">
-											<input type="text" class="form-control" id="inputModbusAdd" placeholder="001">
+											<input type="text" name="ModbusAdd" class="form-control" value=""id="inputModbusAdd" placeholder="001">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="inputModbusSed" class="col-md-3 control-label">Modbus波特率</label>
 										<div class="col-md-5">
-											<!-- <input type="text" class="form-control" id="inputModbusSed" placeholder="19200"> -->
-											<select name="" id="inputModbusSed" class="form-control">
+											<select name="ModbusSed" id="inputModbusSed" class="form-control">
 												<option value="">19200</option>
 												<option value="">9600</option>
 												<option value="">4800</option>
@@ -133,8 +132,14 @@
 		</div>
 	</div>
 
-
-	<script src="static/js/jquery-3.1.0.min.js"></script>
-	<script src="static/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		var value = 18;
+		var FormId = document.getElementById("confParaForm");
+		var firstCol = FormId.elements[0];
+		FormId.elements[0].value = value;
+		console.log(firstCol);
+		console.log(FormId.elements["ModbusSed"]);
+		console.log(FormId.elements.length);
+	</script>
 </body>
-</html>
+</html>  

@@ -26,11 +26,14 @@ Project File Date:  09/22/2016
 
 <h2>Output:</h2>
 Build target 'Template'
-compiling fs.c...
+compiling httpd_cgi_ssi.c...
+..\HARDWARE\LED\led.h(19): warning:  #47-D: incompatible redefinition of macro "LED1" (declared at line 72 of "..\HARDWARE\bsp_led.h")
+  #define LED1 PFout(10)
+..\LWIP\lwip_app\web_server_demo\httpd_cgi_ssi.c: 1 warning, 0 errors
 linking...
 Program Size: Code=122806 RO-data=236394 RW-data=868 ZI-data=357484  
 FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\Template.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   C:\Users\LE_HUA\Desktop\webserverDemo\USER\RTE

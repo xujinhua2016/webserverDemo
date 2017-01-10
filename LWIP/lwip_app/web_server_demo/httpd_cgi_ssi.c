@@ -11,6 +11,9 @@
 
 #include <string.h>
 #include <stdlib.h>
+
+
+#include  "bsp_mem.h"
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32F407开发板
@@ -29,7 +32,14 @@
 
 extern volatile uint32_t	  GE_BAT_Vol[192];
 extern volatile	uint32_t	BatIntRes[192];
+extern __IO	uint8_t	 BSP_BAT_CAN_BAD_Num;
+//extern 
 
+
+
+uint16_t connStatus;
+
+//
 
 #define NUM_CONFIG_CGI_URIS	(sizeof(ppcURLs) / sizeof(tCGI))
 #define NUM_CONFIG_SSI_TAGS	(sizeof(ppcTAGs) / sizeof(char *))
@@ -38,8 +48,9 @@ extern short Get_Temprate(void);  //声明Get_Temperate()函数
 void RTC_Get_Time(u8 *hour,u8 *min,u8 *sec,u8 *ampm){;}; //声明RTC_Get_Timer()函数
 void RTC_Get_Date(u8 *year,u8 *month,u8 *date,u8 *week){;}; //声明RTC_Get_Date()函数
 
-//控制LED的CGI handler
+//控制内阻测试的CGI handler
 const char* LEDS_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
+//控制配置文件修改的CGI hander
 const char* BEEP_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
 
 static const char *ppcTAGs[]=  //SSI的Tag
@@ -47,7 +58,7 @@ static const char *ppcTAGs[]=  //SSI的Tag
 	"v", //电压值
 	"r", //内阻值
 	"h", //时间
-	"y",  //日期
+	"y", //日期
 };
 
 
@@ -421,6 +432,7 @@ void RTCTime_Handler(char *pcInsert)
 	u8 hour,min,sec,ampm;
 	
 	RTC_Get_Time(&hour,&min,&sec,&ampm);
+//	connStatus = BSP_BAT_CAN_BAD_Num;
 	
 	*pcInsert = 		(char)((hour/10) + 0x30);
 	*(pcInsert+1) = (char)((hour%10) + 0x30);
