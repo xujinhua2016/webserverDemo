@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>warning</title>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">   
+	<style type="text/css">
+		body{ font-family: 'Microsoft YaHei';}
+		/*.panel-body{ padding: 0; }*/
+	</style>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h2>绿耳电池巡检仪监控系统</h1>
+				<h3>——V1.0</h3>
+
+			</div>
+		</div>
+		<div class="container">
+			<div class="main">
+				<div class="row">
+					<!-- 左侧内容 -->
+					<div class="col-md-3">
+						<div class="list-group">
+							<a href="userinfo.shtml" class="list-group-item text-center" id="cus_info">用户信息</a>
+							<a href="data.shtml" class="list-group-item text-center" id="cus_mor">监控数据</a>
+							<a href="warning.shtml" class="list-group-item text-center active" id="cus_warn">报警查询</a>
+							<a href="history.shtml" class="list-group-item text-center" id="cus_hty">历史曲线</a>
+							<a href="status.shtml" class="list-group-item text-center " id="cus_stat">状态查询</a>
+							<a href="configChk.shtml" class="list-group-item text-center" id="cus_conf">参数配置</a>
+							<a href="help.shtml" class="list-group-item text-center" id="cus_help">帮助信息</a>
+							<a href="connect.shtml" class="list-group-item text-center" id="cus_conn">联系我们</a>
+						</div>
+					</div>
+					<!-- 右侧内容 -->
+					<div class="col-md-9">
+						<div class="panel panel-default">
+							<div class="panel-heading">电池电压</div>
+							<div class="panel-body">
+								<button type="button" id="vol01stat" class="btn btn-sm btn-success">#01</button>
+								<button type="button" id="vol01stat" class="btn btn-sm btn-success">#02</button>
+								<button type="button" class="btn btn-sm btn-success">#03</button>
+								<button type="button" class="btn btn-sm btn-success">#04</button>
+								<button type="button" class="btn btn-sm btn-success">#05</button>
+								<button type="button" class="btn btn-sm btn-success">#06</button>
+								<button type="button" class="btn btn-sm btn-success">#07</button>
+								<button type="button" class="btn btn-sm btn-success">#08</button>
+								<button type="button" class="btn btn-sm btn-success">#09</button>
+								<button type="button" class="btn btn-sm btn-success">#10</button>
+								<button type="button" class="btn btn-sm btn-success">#11</button>
+								<button type="button" class="btn btn-sm btn-success">#12</button>
+								<button type="button" class="btn btn-sm btn-success">#13</button>
+								<button type="button" class="btn btn-sm btn-success">#14</button>
+								<button type="button" class="btn btn-sm btn-success">#15</button>
+								<button type="button" class="btn btn-sm btn-success">#16</button>
+								<button type="button" class="btn btn-sm btn-success">#17</button>
+								<button type="button" class="btn btn-sm btn-success">#18</button>
+								<button type="button" class="btn btn-sm btn-success">#19</button>
+								<button type="button" class="btn btn-sm btn-success">#20</button>
+								<button type="button" class="btn btn-sm btn-danger">#21</button>
+								<button type="button" class="btn btn-sm btn-success">#22</button>
+								<button type="button" class="btn btn-sm btn-success">#23</button>
+								<button type="button" class="btn btn-sm btn-danger">#24</button>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">电池内阻</div>
+							<div class="panel-body">
+								<button type="button" class="btn btn-sm btn-success">#01</button>
+								<button type="button" class="btn btn-sm btn-success">#02</button>
+								<button type="button" class="btn btn-sm btn-success">#03</button>
+								<button type="button" class="btn btn-sm btn-success">#04</button>
+								<button type="button" class="btn btn-sm btn-success">#05</button>
+								<button type="button" class="btn btn-sm btn-success">#06</button>
+								<button type="button" class="btn btn-sm btn-success">#07</button>
+								<button type="button" class="btn btn-sm btn-success">#08</button>
+								<button type="button" class="btn btn-sm btn-success">#09</button>
+								<button type="button" class="btn btn-sm btn-success">#10</button>
+								<button type="button" class="btn btn-sm btn-success">#11</button>
+								<button type="button" class="btn btn-sm btn-success">#12</button>
+								<button type="button" class="btn btn-sm btn-success">#13</button>
+								<button type="button" class="btn btn-sm btn-success">#14</button>
+								<button type="button" class="btn btn-sm btn-success">#15</button>
+								<button type="button" class="btn btn-sm btn-success">#16</button>
+								<button type="button" class="btn btn-sm btn-success">#17</button>
+								<button type="button" class="btn btn-sm btn-success">#18</button>
+								<button type="button" class="btn btn-sm btn-success">#19</button>
+								<button type="button" class="btn btn-sm btn-success">#20</button>
+								<button type="button" class="btn btn-sm btn-danger">#21</button>
+								<button type="button" class="btn btn-sm btn-success">#22</button>
+								<button type="button" class="btn btn-sm btn-success">#23</button>
+								<button type="button" class="btn btn-sm btn-success">#24</button>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">电池组工作电压</div>
+							<div class="panel-body">
+								<button type="button" class="btn btn-sm btn-primary">电池组</button>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">电池组充放电流</div>
+							<div class="panel-body">
+								<button type="button" class="btn btn-sm btn-success">充电</button>
+								<button type="button" class="btn btn-sm btn-success">放电</button>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">电池组工作环境温度</div>
+							<div class="panel-body">
+								<button type="button" class="btn btn-sm btn-primary">温度</button>
+							</div>
+						</div>
+
+						<span class="text">说明：</span>
+						<button type="button" class="btn btn-xs btn-danger">告警</button>
+						<button type="button" class="btn btn-xs btn-success">正常</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部 -->
+	<div class="jumbotron" style=" margin-bottom:0;margin-top:100px;">
+		<div class="container">
+			<center><span>&copy; 上海绿耳新能源科技有限公司</span></center>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var vol01 = 1;
+		var content_vol01 = document.getElementById("vol01stat");
+		if(vol01 == 1)
+		{
+			content_vol01.className = q.className.replace(/(?:^|\s)btn(?!\S)/g , 'btn btn-sm btn-danger');
+
+		}
+		// document.getElementById("MyElement").className =
+  //  document.getElementById("MyElement").className
+	</script>
+</body>
+</html>
