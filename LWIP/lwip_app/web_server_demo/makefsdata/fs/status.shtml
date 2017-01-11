@@ -71,7 +71,7 @@
 	<script type="text/javascript">
 		
 		var pElementStaVal = document.getElementById("envStatus");
-		console.log(pElementStaVal);
+		// console.log(pElementStaVal);
 		//1-5位保存温度信息
 		var Val = parseInt(pElementStaVal.innerHTML.substr(9,5));
 		//6-10位保存电流信息

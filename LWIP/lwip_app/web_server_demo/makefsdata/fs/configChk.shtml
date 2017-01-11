@@ -40,22 +40,19 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">参数配置</div>
 							<div class="panel-body">
-								<form action="" method="post">
-									<input type="hidden" name="_token" value="abmzuNCegKdnOWsBIY7BbCUDEnK4GHuoieHpfh9C">
-									<ul>
-
-										<li>
-											输入密码：<input type="password" name="user_name" class="text" value="greenear" />
-											<span><i class="fa fa-user"></i></span>
-										</li>
-										<br>
-
-										<li>
-											<input type="submit" value="提交"/>
-										</li>
-									</ul>
-								</form>
-
+								<form class="form-horizontal" action="/confchk.cgi" role="form" name="form" method="GET">
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label">配置密码</label>
+											<div class="col-sm-6">
+												<input type="password" class="form-control" id="inputEmail3" name="pass">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-6">
+												<button type="submit" class="btn btn-default" onclick="return sub()">提交</button>
+											</div>
+										</div>
+									</form>
 							</div>
 						</div>
 					</div>
@@ -69,5 +66,27 @@
 			<center><span>&copy; 上海绿耳新能源科技有限公司</span></center>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function sub()
+		{
+			var pass = document.form.pass.value;
+
+			if (pass == "") 
+			{
+				alert("密码不能为空！")
+				return false;
+			}else if(pass != "123456")
+			{
+				alert("密码不正确！")
+				return false;
+			}
+			
+			else 
+			{
+				document.form.submit();
+			}
+
+		}
+	</script>
 </body>
 </html>

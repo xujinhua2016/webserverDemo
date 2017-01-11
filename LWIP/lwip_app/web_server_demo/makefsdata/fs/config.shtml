@@ -9,6 +9,9 @@
 	<style type="text/css">
 		body{ font-family: 'Microsoft YaHei';}
 		/*.panel-body{ padding: 0; }*/
+		#noDisplay{
+			display:none;
+		}
 	</style>
 </head>
 <body>
@@ -40,23 +43,37 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">参数配置</div>
 							<div class="panel-body">
-								<form action="/ConfigPara.cgi" class="form-horizontal" id="confParaForm" role="form" method="get">
+								<form action="/confdate.cgi" class="form-horizontal" id="confParaForm" role="form" method="get">
 									<div class="form-group">
 										<label for="inputModbusAdd" class="col-md-3 control-label">Modbus地址</label>
 										<div class="col-md-5">
-											<input type="text" name="ModbusAdd" class="form-control" value=""id="inputModbusAdd" placeholder="001">
+											<select name="ModbusAdd" id="inputModbusAdd" class="form-control">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+											</select>
+
 										</div>
 									</div>
+									<fieldset disabled>
 									<div class="form-group">
 										<label for="inputModbusSed" class="col-md-3 control-label">Modbus波特率</label>
 										<div class="col-md-5">
 											<select name="ModbusSed" id="inputModbusSed" class="form-control">
-												<option value="">19200</option>
-												<option value="">9600</option>
-												<option value="">4800</option>
+												<option value="19200">19200</option>
 											</select>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<label for="inputSigBatVolH" class="col-md-3 control-label">单体电池最高电压</label>
 										<div class="col-md-5">
@@ -111,6 +128,7 @@
 											<input type="text" class="form-control" id="inputEnvTempL" placeholder="-10°C">
 										</div>
 									</div>
+									</fieldset>
 									<div class="form-group">
 										<div class="col-md-offset-3 col-sm-5">
 											<button class="btn btn-default">提交</button>
@@ -131,12 +149,16 @@
 			<center><span>&copy; 上海绿耳新能源科技有限公司</span></center>
 		</div>
 	</div>
+	<div id="noDisplay">
+		<p id="confVal"><!--#c--></p>
+	</div>
 
 	<script type="text/javascript">
-		var value = 18;
-		var FormId = document.getElementById("confParaForm");
-		var firstCol = FormId.elements[0];
-		FormId.elements[0].value = value;
+		var pElementStaVal = document.getElementById("confVal");
+
+		//取出前3位，modbus地址的 信息
+		var addrVal = parseInt(pElementStaVal.innerHTML.substr(9,3));
+		document.getElementById("confParaForm").elements[0].value = addrVal;
 	</script>
 </body>
 </html>  

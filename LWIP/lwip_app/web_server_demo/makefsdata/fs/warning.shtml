@@ -38,7 +38,6 @@
 							<a href="connect.shtml" class="list-group-item text-center" id="cus_conn">联系我们</a>
 						</div>
 					</div>
-					<!-- 右侧内容 -->
 					<div class="col-md-9">
 						<div class="panel panel-default">
 							<div class="panel-heading">电池电压</div>
@@ -67,32 +66,6 @@
 							<span class="label label-success" id="cus_vol_22stat">#22</span>
 							<span class="label label-success" id="cus_vol_23stat">#23</span>
 							<span class="label label-success" id="cus_vol_24stat">#24</span>
-							<!-- 
-								<button type="button" id="cus_vol_01stat" class="btn btn-sm btn-success">#01</button>
-								<button type="button" id="cus_vol_02stat" class="btn btn-sm btn-success">#02</button>
-								<button type="button" id="cus_vol_03stat" class="btn btn-sm btn-success">#03</button>
-								<button type="button" id="cus_vol_04stat" class="btn btn-sm btn-success">#04</button>
-								<button type="button" id="cus_vol_05stat" class="btn btn-sm btn-success">#05</button>
-								<button type="button" id="cus_vol_06stat" class="btn btn-sm btn-success">#06</button>
-								<button type="button" id="cus_vol_07stat" class="btn btn-sm btn-success">#07</button>
-								<button type="button" id="cus_vol_08stat" class="btn btn-sm btn-success">#08</button>
-								<button type="button" id="cus_vol_09stat" class="btn btn-sm btn-success">#09</button>
-								<button type="button" id="cus_vol_10stat" class="btn btn-sm btn-success">#10</button>
-								<button type="button" id="cus_vol_11stat" class="btn btn-sm btn-success">#11</button>
-								<button type="button" id="cus_vol_12stat" class="btn btn-sm btn-success">#12</button>
-								<button type="button" id="cus_vol_13stat" class="btn btn-sm btn-success">#13</button>
-								<button type="button" id="cus_vol_14stat" class="btn btn-sm btn-success">#14</button>
-								<button type="button" id="cus_vol_15stat" class="btn btn-sm btn-success">#15</button>
-								<button type="button" id="cus_vol_16stat" class="btn btn-sm btn-success">#16</button>
-								<button type="button" id="cus_vol_17stat" class="btn btn-sm btn-success">#17</button>
-								<button type="button" id="cus_vol_18stat" class="btn btn-sm btn-success">#18</button>
-								<button type="button" id="cus_vol_19stat" class="btn btn-sm btn-success">#19</button>
-								<button type="button" id="cus_vol_20stat" class="btn btn-sm btn-success">#20</button>
-								<button type="button" id="cus_vol_21stat" class="btn btn-sm btn-success">#21</button>
-								<button type="button" id="cus_vol_22stat" class="btn btn-sm btn-success">#22</button>
-								<button type="button" id="cus_vol_23stat" class="btn btn-sm btn-success">#23</button>
-								<button type="button" id="cus_vol_24stat" class="btn btn-sm btn-success">#24</button>
- -->
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -122,61 +95,31 @@
 								<span class="label label-success" id="cus_res_22stat">#22</span>
 								<span class="label label-success" id="cus_res_23stat">#23</span>
 								<span class="label label-success" id="cus_res_24stat">#24</span>
-							<!-- 	<button type="button" id="cus_res_01stat" class="btn btn-sm btn-success">#01</button>
-								<button type="button" id="cus_res_02stat" class="btn btn-sm btn-success">#02</button>
-								<button type="button" id="cus_res_03stat" class="btn btn-sm btn-success">#03</button>
-								<button type="button" id="cus_res_04stat" class="btn btn-sm btn-success">#04</button>
-								<button type="button" id="cus_res_05stat" class="btn btn-sm btn-success">#05</button>
-								<button type="button" id="cus_res_06stat" class="btn btn-sm btn-success">#06</button>
-								<button type="button" id="cus_res_07stat" class="btn btn-sm btn-success">#07</button>
-								<button type="button" id="cus_res_08stat" class="btn btn-sm btn-success">#08</button>
-								<button type="button" id="cus_res_09stat" class="btn btn-sm btn-success">#09</button>
-								<button type="button" id="cus_res_10stat" class="btn btn-sm btn-success">#10</button>
-								<button type="button" id="cus_res_11stat" class="btn btn-sm btn-success">#11</button>
-								<button type="button" id="cus_res_12stat" class="btn btn-sm btn-success">#12</button>
-								<button type="button" id="cus_res_13stat" class="btn btn-sm btn-success">#13</button>
-								<button type="button" id="cus_res_14stat" class="btn btn-sm btn-success">#14</button>
-								<button type="button" id="cus_res_15stat" class="btn btn-sm btn-success">#15</button>
-								<button type="button" id="cus_res_16stat" class="btn btn-sm btn-success">#16</button>
-								<button type="button" id="cus_res_17stat" class="btn btn-sm btn-success">#17</button>
-								<button type="button" id="cus_res_18stat" class="btn btn-sm btn-success">#18</button>
-								<button type="button" id="cus_res_19stat" class="btn btn-sm btn-success">#19</button>
-								<button type="button" id="cus_res_20stat" class="btn btn-sm btn-success">#20</button>
-								<button type="button" id="cus_res_21stat" class="btn btn-sm btn-success">#21</button>
-								<button type="button" id="cus_res_22stat" class="btn btn-sm btn-success">#22</button>
-								<button type="button" id="cus_res_23stat" class="btn btn-sm btn-success">#23</button>
-								<button type="button" id="cus_res_24stat" class="btn btn-sm btn-success">#24</button> -->
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">电池组工作电压</div>
 							<div class="panel-body">
 								<span class="label label-success" id="cus_Bat_gstat">电池组</span>
-								<!-- <button type="button" id="cus_Bat_gstat" class="btn btn-sm btn-success">电池组</button> -->
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">电池组充放电流</div>
 							<div class="panel-body">
 								<span class="label label-success" id="cus_char_stat">充电</span>
-								<span class="label label-success" id="cus_disc_stat">放电</span><!-- 
-								<button type="button" id="cus_char_stat" class="btn btn-sm btn-success">充电</button>
-								<button type="button" id="cus_disc_stat" class="btn btn-sm btn-success">放电</button> -->
+								<span class="label label-success" id="cus_disc_stat">放电</span>
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">电池组工作环境温度</div>
 							<div class="panel-body">
 								<span class="label label-success" id="cus_env_temp">温度</span>
-								<!-- <button type="button" id="cus_env_temp" class="btn btn-sm btn-success">温度</button> -->
 							</div>
 						</div>
 
 						<span class="text">说明：</span>
 						<span class="label label-success">正常</span>
 						<span class="label label-danger">告警</span>
-						<!-- <button type="button" class="btn btn-xs btn-danger">告警</button>
-						<button type="button" class="btn btn-xs btn-success">正常</button> -->
 					</div>
 				</div>
 			</div>
@@ -212,7 +155,6 @@
 					var strval= "cus_vol_"+i+"stat";
 				}
 				document.getElementById(strval).className = document.getElementById(strval).className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');
-				console.log(document.getElementById(strval).className);
 			}
 			else
 				{;}
@@ -233,6 +175,7 @@
 				{;}
 			
 		}
+		console.log(otrwarnVal);
 		if((otrwarnVal & (1<<0))||(otrwarnVal & (1<<1)))
 		{
 			document.getElementById("cus_Bat_gstat").className = document.getElementById("cus_Bat_gstat").className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');

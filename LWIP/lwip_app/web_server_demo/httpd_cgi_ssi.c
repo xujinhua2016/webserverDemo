@@ -14,6 +14,7 @@
 
 
 #include  "bsp_mem.h"  
+//#include  "GE_PM.h"
 
 extern volatile uint32_t	GE_BAT_Vol[192];
 extern volatile	uint32_t	BatIntRes[192];
@@ -22,6 +23,7 @@ extern volatile	uint32_t	Temperature;	    // 环境温度
 extern volatile	uint32_t	ChargeCurrentVal; // 充放电电流
 extern __IO	uint8_t	 BSP_BAT_CAN_BAD_Num;
 
+extern __IO  uint8_t   BAT_Vol_Res_Dect_Flag;		//内阻测试开关的标志量
 
 extern volatile uint32_t 	BatVolWarnBit000_015;	// #000~#015号电池
 extern volatile uint32_t 	BatVolWarnBit016_031;
@@ -30,6 +32,8 @@ extern volatile uint32_t	BatResWarnBit000_015;	// #000~#015号电池
 extern volatile uint32_t 	BatResWarnBit016_031;
 
 extern volatile	uint32_t  GroBatWarn;	 
+
+
 
 uint16_t connStatus;
 
@@ -46,8 +50,15 @@ void RTC_Get_Date(u8 *year,u8 *month,u8 *date,u8 *week){;}; //声明RTC_Get_Date()
 const char* LEDS_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 //控制配置文件修改的CGI hander
 const char* BEEP_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
+//登陆界面提交按钮处理
 const char* login_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
-
+//内阻测试提交按钮处理
+const char* resTest_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
+//参数配置密码验证提交按钮处理
+const char* confChk_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
+//参数配置数据提交按钮处理
+const char* confDate_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
+	
 static const char *ppcTAGs[]=  //SSI的Tag
 {
 	"v", //电压值
@@ -56,6 +67,7 @@ static const char *ppcTAGs[]=  //SSI的Tag
 	"y", //内阻告警位
 	"o", //其他告警信息
 	"s", //从机连接状态和温度电流信息查询
+	"c", //配置信息数据，modbus地址和波特率
 };
 
 
@@ -64,6 +76,9 @@ static const tCGI ppcURLs[]= //cgi程序
 	{"/leds.cgi",LEDS_CGI_Handler},
 	{"/beep.cgi",BEEP_CGI_Handler},
 	{"/login.cgi",login_CGI_Handler},
+	{"/restest.cgi",resTest_CGI_Handler},
+	{"/confchk.cgi",confChk_CGI_Handler},
+	{"/confdate.cgi",confDate_CGI_Handler},
 };
 
 
@@ -418,13 +433,7 @@ void resVal_Handler(char *pcInsert)
 
 //SSIHandler中需要用到的处理电压告警值的函数
 void volWarn_Handler(char *pcInsert)
-{
-	//首先用于拼接数字
-	//取出BatVolWarnBit000_015的低16bit
-//	uint16_t batVolWarnBit00_15 = BatVolWarnBit000_015 & 0xffff;
-	//取出BatVolWarnBit016_031的低16bit
-//	uint16_t batVolWarnBit16_32 = BatVolWarnBit016_031 & 0xffff;
-	
+{	
 	int i;
 	
 	//拼接数值
@@ -538,6 +547,34 @@ void staWarn_Handler(char *pcInsert)
 	 }
 	
 }
+//SSIHandler中需要用到的处理其他告警值的函数
+void confVal_Handler(char *pcInsert)
+{
+	int i;
+	uint32_t addrVal = BKP_ReadBackupRegister(SlaveAddress);//Modbus地址信息
+	uint32_t rateVal = BKP_ReadBackupRegister(TransBaudRate);//电流信息
+	uint8_t ConSVal = BSP_BAT_CAN_BAD_Num;//从机连接状态信息
+	//24位数，对应十进制是8位，千万
+	char Digit[9];
+	
+	
+	Digit[0] = addrVal/100;
+	Digit[1] = (addrVal - Digit[0]*100)/10;
+	Digit[2] = (addrVal - Digit[0]*100 - Digit[1]*10);
+	
+	Digit[3] = rateVal/100000;
+	Digit[4] = (rateVal - Digit[3]*100000)/10000;	
+	Digit[5] = (rateVal - Digit[3]*100000 - Digit[4]*10000)/1000;	
+	Digit[6] = (rateVal - Digit[3]*100000 - Digit[4]*10000 - Digit[5]*1000)/100;	
+	Digit[7] = (rateVal - Digit[3]*100000 - Digit[4]*10000 - Digit[5]*1000 - Digit[6]*100)/10;
+	Digit[8] = (rateVal - Digit[3]*100000 - Digit[4]*10000 - Digit[5]*1000 - Digit[6]*100 - Digit[7]*10);
+
+	//准备添加到html中的数据
+	for( i = 0; i < 9; i++) {
+		 *(pcInsert + + i) = (char)(Digit[i]+0x30); 
+	 }
+	
+}
 //SSI的Handler句柄
 static u16_t SSIHandler(int iIndex,char *pcInsert,int iInsertLen)
 {
@@ -560,6 +597,9 @@ static u16_t SSIHandler(int iIndex,char *pcInsert,int iInsertLen)
 				break;
 		case 5:
 				staWarn_Handler(pcInsert);
+				break;
+		case 6:
+				confVal_Handler(pcInsert);
 				break;
 	}
 	return strlen(pcInsert);
@@ -622,6 +662,75 @@ const char *login_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pc
 {
 	//在此处，可以进行参数的验证，此处略。在前端页面处理验证。
 	 return "/userinfo.shtml";  
+	
+}
+
+const char *resTest_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[])
+{
+	//
+	u8 i=0;
+	iIndex = FindCGIParameter("RESTEST",pcParam,iNumParams);  //找到BEEP的索引号
+	if(iIndex != -1) //找到BEEP索引号
+	{
+		BEEP=0;  //关闭
+		for(i = 0;i < iNumParams;i++)
+		{
+			if(strcmp(pcParam[i],"RESTEST") == 0)  //查找CGI参数
+			{
+				if(strcmp(pcValue[i],"TESTOK") == 0) //打开BEEP
+					BAT_Vol_Res_Dect_Flag = 1;
+				else
+					;
+			}
+			else ;
+		}	
+		
+	}
+	 return "/data.shtml";;  
+	
+}
+
+const char *confChk_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[])
+{
+	//在此处，可以进行参数的验证，此处略。在前端页面处理验证。
+	 return "/config.shtml";  
+	
+}
+
+const char *confDate_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[])
+{
+	//。
+	u8 i=0;
+	uint8_t modbus_add_temp;
+	uint8_t modbus_rate_temp;
+	
+	iIndex = FindCGIParameter("ModbusAdd",pcParam,iNumParams);  //找到ModbusAdd的索引号,file:///C:/confdate.cgi?ModbusAdd=15&ModbusSed=4800
+	if(iIndex != -1) //找到BEEP索引号
+	{
+		for(i = 0;i < iNumParams;i++)
+		{
+			if(strcmp(pcParam[i],"ModbusAdd") == 0)  //查找CGI参数
+			{
+				modbus_add_temp = atoi(pcValue[i]);
+				BKP_WriteBackupRegister(SlaveAddress, modbus_add_temp);
+			}
+		}
+	}
+//	
+//	iIndex = FindCGIParameter("ModbusSed",pcParam,iNumParams);  //找到ModbusAdd的索引号,file:///C:/confdate.cgi?ModbusAdd=15&ModbusSed=4800
+//	if(iIndex != -1) //找到BEEP索引号
+//	{
+//		for(i = 0;i < iNumParams;i++)
+//		{
+//			if(strcmp(pcParam[i],"ModbusSed") == 0)  //查找CGI参数
+//			{
+//				modbus_rate_temp = atoi(pcValue[i]);
+//				BKP_WriteBackupRegister(TransBaudRate, modbus_rate_temp);
+//			}
+//		}
+//	}
+	
+	 return "/config.shtml";  
 	
 }
 

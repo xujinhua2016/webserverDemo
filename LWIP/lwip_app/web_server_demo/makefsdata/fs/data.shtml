@@ -16,12 +16,6 @@
 			#noDisplay{
 				display:none;
 			}
-			#text1{
-				display:none;
-			}
-			#text2{
-				display:none;
-			}
 			#div1{
 				/*border: 2px solid red;*/
 				text-align:center;
@@ -69,77 +63,22 @@
 								<center><div class="panel-heading">电池内阻</div></center>
 								<canvas id="myChart1" width="800" height="300"></canvas>	
 							</div>
-
-
-
 							<script>
 
 								var pElementVolt = document.getElementById("volt");
 								var pElementRes = document.getElementById("res");
 								
-								var result = pElementVolt.innerHTML;
-								var result1 = pElementRes.innerHTML;
+								var displayVoltData=new Array(24);
+								for (var i = 0; i < 24; i++) {
+									var sIndex = 9 + 4 * i;
+									displayVoltData[i] =  parseInt(pElementVolt.innerHTML.substr(sIndex,4))/1000;
+								}
 
-								
-								var volt1 = parseInt(pElementVolt.innerHTML.substr(9,4));
-								var volt2 = parseInt(pElementVolt.innerHTML.substr(13,4));
-								var volt3 = parseInt(pElementVolt.innerHTML.substr(17,4));
-								var volt4 = parseInt(pElementVolt.innerHTML.substr(21,4));
-								var volt5 = parseInt(pElementVolt.innerHTML.substr(25,4));
-								var volt6 = parseInt(pElementVolt.innerHTML.substr(29,4));
-								
-								var volt7 = parseInt(pElementVolt.innerHTML.substr(33,4));
-								var volt8 = parseInt(pElementVolt.innerHTML.substr(37,4));
-								var volt9 = parseInt(pElementVolt.innerHTML.substr(41,4));
-								var volt10 = parseInt(pElementVolt.innerHTML.substr(45,4));
-								var volt11 = parseInt(pElementVolt.innerHTML.substr(49,4));
-								var volt12 = parseInt(pElementVolt.innerHTML.substr(53,4));
-								
-								var volt13 = parseInt(pElementVolt.innerHTML.substr(57,4));
-								var volt14 = parseInt(pElementVolt.innerHTML.substr(61,4));
-								var volt15 = parseInt(pElementVolt.innerHTML.substr(65,4));
-								var volt16 = parseInt(pElementVolt.innerHTML.substr(69,4));
-								var volt17 = parseInt(pElementVolt.innerHTML.substr(73,4));
-								var volt18 = parseInt(pElementVolt.innerHTML.substr(77,4));
-								
-								var volt19 = parseInt(pElementVolt.innerHTML.substr(81,4));
-								var volt20 = parseInt(pElementVolt.innerHTML.substr(85,4));
-								var volt21 = parseInt(pElementVolt.innerHTML.substr(89,4));
-								var volt22 = parseInt(pElementVolt.innerHTML.substr(93,4));
-								var volt23 = parseInt(pElementVolt.innerHTML.substr(97,4));
-								var volt24 = parseInt(pElementVolt.innerHTML.substr(101,4));
-								
-								
-								var res1 = parseInt(pElementRes.innerHTML.substr(9,4));
-								var res2 = parseInt(pElementRes.innerHTML.substr(13,4));
-								var res3 = parseInt(pElementRes.innerHTML.substr(17,4));
-								var res4 = parseInt(pElementRes.innerHTML.substr(21,4));
-								var res5 = parseInt(pElementRes.innerHTML.substr(25,4));
-								var res6 = parseInt(pElementRes.innerHTML.substr(29,4));
-								
-								var res7 = parseInt(pElementRes.innerHTML.substr(33,4));
-								var res8 = parseInt(pElementRes.innerHTML.substr(37,4));
-								var res9 = parseInt(pElementRes.innerHTML.substr(41,4));
-								var res10 = parseInt(pElementRes.innerHTML.substr(45,4));
-								var res11 = parseInt(pElementRes.innerHTML.substr(49,4));
-								var res12 = parseInt(pElementRes.innerHTML.substr(53,4));
-								
-								var res13 = parseInt(pElementRes.innerHTML.substr(57,4));
-								var res14 = parseInt(pElementRes.innerHTML.substr(61,4));
-								var res15 = parseInt(pElementRes.innerHTML.substr(65,4));
-								var res16 = parseInt(pElementRes.innerHTML.substr(69,4));
-								var res17 = parseInt(pElementRes.innerHTML.substr(73,4));
-								var res18 = parseInt(pElementRes.innerHTML.substr(77,4));
-								
-								var res19 = parseInt(pElementRes.innerHTML.substr(81,4));
-								var res20 = parseInt(pElementRes.innerHTML.substr(85,4));
-								var res21 = parseInt(pElementRes.innerHTML.substr(89,4));
-								var res22 = parseInt(pElementRes.innerHTML.substr(93,4));
-								var res23 = parseInt(pElementRes.innerHTML.substr(97,4));
-								var res24 = parseInt(pElementRes.innerHTML.substr(101,4));
-
-								var displayVoltData = [volt1,volt2,volt3,volt4,volt5,volt6,volt7,volt8,volt9,volt10,volt11,volt12,volt13,volt14,volt15,volt16,volt17,volt18,volt19,volt20,volt21,volt22,volt23,volt24];
-								var displayResData = [res1,res2,res3,res4,res5,res6,res7,res8,res9,res10,res11,res12,res13,res14,res15,res16,res17,res18,res19,res20,res21,res22,res23,res24];
+								var displayResData=new Array(24);
+								for (var i = 0; i < 24; i++) {
+									var sIndex = 9 + 4 * i;
+									displayResData[i] =  parseInt(pElementRes.innerHTML.substr(sIndex,4));
+								}
 
 								var ctx = document.getElementById("myChart").getContext('2d');
 								var ctx1 = document.getElementById("myChart1").getContext('2d');
@@ -161,19 +100,21 @@
 									{
 										fillColor : "rgba(151,187,205,0.5)",
 										strokeColor : "rgba(151,187,205,1)",
-									//data : [0.84,19.7,1.4,2.5,1.6,4.3,1.1,0.5,2.8,9.4,
-									//5.9,6.4,8.2,7.3,1.6,4.3,1.1,0.5,2.8,9.4,5.9,6.4,8.2,7.3]
 									data : displayResData
 								}
 								]
 							}
-							var myChartLine = new Chart(ctx).Bar(data,{scaleLabel : "<%=value%>mV",});
+							var myChartLine = new Chart(ctx).Bar(data,{scaleLabel : "<%=value%>V",});
 							var myChartLine1 = new Chart(ctx1).Bar(data1,{scaleLabel : "<%=value%>mΩ",});
 						</script>
 						<ul>
-							<li>
+							<form action="/restest.cgi" method="get" name="form1">
+								<input type="hidden" name="RESTEST" value="TESTOK">
+								<input type="submit" name="button" value="内阻测试"/>
+							</form>
+							<!-- <li>
 								<input type="submit" value="内阻测试"/>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 				</div>
