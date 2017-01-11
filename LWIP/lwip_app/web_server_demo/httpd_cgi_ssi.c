@@ -13,29 +13,23 @@
 #include <stdlib.h>
 
 
-#include  "bsp_mem.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32F407开发板
-//NETCONN API编程方式的WebServer测试代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2014/8/15
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved									  
-//*******************************************************************************
-//修改信息
-//无
-////////////////////////////////////////////////////////////////////////////////// 	   
+#include  "bsp_mem.h"  
 
-extern volatile uint32_t	  GE_BAT_Vol[192];
+extern volatile uint32_t	GE_BAT_Vol[192];
 extern volatile	uint32_t	BatIntRes[192];
+
+extern volatile	uint32_t	Temperature;	    // 环境温度
+extern volatile	uint32_t	ChargeCurrentVal; // 充放电电流
 extern __IO	uint8_t	 BSP_BAT_CAN_BAD_Num;
-//extern 
 
 
+extern volatile uint32_t 	BatVolWarnBit000_015;	// #000~#015号电池
+extern volatile uint32_t 	BatVolWarnBit016_031;
+
+extern volatile uint32_t	BatResWarnBit000_015;	// #000~#015号电池
+extern volatile uint32_t 	BatResWarnBit016_031;
+
+extern volatile	uint32_t  GroBatWarn;	 
 
 uint16_t connStatus;
 
@@ -52,13 +46,16 @@ void RTC_Get_Date(u8 *year,u8 *month,u8 *date,u8 *week){;}; //声明RTC_Get_Date()
 const char* LEDS_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 //控制配置文件修改的CGI hander
 const char* BEEP_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
+const char* login_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[]);
 
 static const char *ppcTAGs[]=  //SSI的Tag
 {
 	"v", //电压值
 	"r", //内阻值
-	"h", //时间
-	"y", //日期
+	"x", //电压告警位
+	"y", //内阻告警位
+	"o", //其他告警信息
+	"s", //从机连接状态和温度电流信息查询
 };
 
 
@@ -66,6 +63,7 @@ static const tCGI ppcURLs[]= //cgi程序
 {
 	{"/leds.cgi",LEDS_CGI_Handler},
 	{"/beep.cgi",BEEP_CGI_Handler},
+	{"/login.cgi",login_CGI_Handler},
 };
 
 
@@ -84,8 +82,8 @@ static int FindCGIParameter(const char *pcToFind,char *pcParam[],int iNumParams)
 }
 
 
-//SSIHandler中需要用到的处理ADC的函数
-void ADC_Handler(char *pcInsert)
+//SSIHandler中需要用到的处理电压值的函数
+void volVal_Handler(char *pcInsert)
 { 
 		int i;
 	
@@ -93,20 +91,12 @@ void ADC_Handler(char *pcInsert)
 		char Digit1[24]; 
 		char Digit2[24]; 
 		char Digit3[24]; 
-		uint32_t ADCVal[24];
-		//uint32_t ADCVal[24] = {20,30,45,23,54,45,232,233,1,142,34,5,23,91,34,234,132,43,123,35,34,12,54,12};    
-			for ( i = 0; i < 24; i++ )
+		uint32_t ADCVal[24];  
+		
+		for ( i = 0; i < 24; i++ )
 		{
 			ADCVal[i] = GE_BAT_Vol[i];
 		}  
-        
-
-     //获取ADC的值
-     //ADCVal = Get_Adc_Average(5,10); //获取ADC1_CH5的电压值
-		
-     
-     //转换为电压 ADCVval * 0.8mv
-     //ADCVal = (uint32_t)(ADCVal * 0.8); 
 			
      Digit[0]= ADCVal[0]/1000;
      Digit[1]= (ADCVal[0]-(Digit[0]*1000))/100 ;
@@ -258,8 +248,8 @@ void ADC_Handler(char *pcInsert)
 		
 }
 
-//SSIHandler中需要用到的处理内部温度传感器的函数
-void Temperate_Handler(char *pcInsert)
+//SSIHandler中需要用到的处理内阻值的函数
+void resVal_Handler(char *pcInsert)
 {
 		int i;
 		char Digit[24]; 
@@ -426,47 +416,126 @@ void Temperate_Handler(char *pcInsert)
 		 }
 }
 
-//SSIHandler中需要用到的处理RTC时间的函数
-void RTCTime_Handler(char *pcInsert)
+//SSIHandler中需要用到的处理电压告警值的函数
+void volWarn_Handler(char *pcInsert)
 {
-	u8 hour,min,sec,ampm;
+	//首先用于拼接数字
+	//取出BatVolWarnBit000_015的低16bit
+//	uint16_t batVolWarnBit00_15 = BatVolWarnBit000_015 & 0xffff;
+	//取出BatVolWarnBit016_031的低16bit
+//	uint16_t batVolWarnBit16_32 = BatVolWarnBit016_031 & 0xffff;
 	
-	RTC_Get_Time(&hour,&min,&sec,&ampm);
-//	connStatus = BSP_BAT_CAN_BAD_Num;
+	int i;
 	
-	*pcInsert = 		(char)((hour/10) + 0x30);
-	*(pcInsert+1) = (char)((hour%10) + 0x30);
-	*(pcInsert+2) = ':';
-	*(pcInsert+3) = (char)((min/10) + 0x30);
-	*(pcInsert+4) = (char)((min%10) + 0x30);
-	*(pcInsert+5) = ':';
-	*(pcInsert+6) = (char)((sec/10) + 0x30);
-	*(pcInsert+7) = (char)((sec%10) + 0x30);
+	//拼接数值
+	uint32_t batVolWarn = BatVolWarnBit016_031 << 16 | (BatVolWarnBit000_015 & 0xffff);
+	//24位数，对应十进制是8位，千万
+	char Digit[8];
+	
+	
+	Digit[0] = batVolWarn/10000000;
+	Digit[1] = (batVolWarn - Digit[0]*10000000)/1000000;
+	Digit[2] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000)/100000;
+	Digit[3] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000)/10000;
+	Digit[4] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000)/1000;
+	Digit[5] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000)/100;
+	Digit[6] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000 - Digit[5]*100)/10;
+	Digit[7] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000 - Digit[5]*100 - Digit[6]*10);
+	
+	//准备添加到html中的数据
+	for( i = 0; i < 8; i++) {
+		 *(pcInsert + + i) = (char)(Digit[i]+0x30); 
+	 }
+	
 }
 
-//SSIHandler中需要用到的处理RTC日期的函数
-void RTCdate_Handler(char *pcInsert)
+//SSIHandler中需要用到的处理内阻告警值的函数
+void resWarn_Handler(char *pcInsert)
 {
-	u8 year,month,date,week;
-	RTC_Get_Date(&year,&month,&date,&week);
+	int i;
 	
-	*pcInsert = '2';
-	*(pcInsert+1) = '0';
-	*(pcInsert+2) = (char)((year/10) + 0x30);
-	*(pcInsert+3) = (char)((year%10) + 0x30);
-	*(pcInsert+4) = '-';
-	*(pcInsert+5) = (char)((month/10) + 0x30);
-	*(pcInsert+6) = (char)((month%10) + 0x30);
-	*(pcInsert+7) = '-';
-	*(pcInsert+8) = (char)((date/10) + 0x30);
-	*(pcInsert+9) = (char)((date%10) + 0x30);
-	*(pcInsert+10) = ' ';
-	*(pcInsert+11) = 'w';
-	*(pcInsert+12) = 'e';
-	*(pcInsert+13) = 'e';
-	*(pcInsert+14) = 'k';
-	*(pcInsert+15) = ':';
-	*(pcInsert+16) = (char)(week + 0x30);
+	//拼接数值
+	uint32_t batVolWarn = BatResWarnBit016_031 << 16 | BatResWarnBit000_015;
+	//24位数，对应十进制是8位，千万
+	char Digit[8];
+	
+	
+	Digit[0] = batVolWarn/10000000;
+	Digit[1] = (batVolWarn - Digit[0]*10000000)/1000000;
+	Digit[2] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000)/100000;
+	Digit[3] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000)/10000;
+	Digit[4] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000)/1000;
+	Digit[5] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000)/100;
+	Digit[6] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000 - Digit[5]*100)/10;
+	Digit[7] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000 - Digit[5]*100 - Digit[6]*10);
+	
+	//准备添加到html中的数据
+	for( i = 0; i < 8; i++) {
+		 *(pcInsert + + i) = (char)(Digit[i]+0x30); 
+	 }
+	
+}
+//SSIHandler中需要用到的处理其他告警值的函数
+void otrWarn_Handler(char *pcInsert)
+{
+	int i;
+	
+	//拼接数值
+	uint32_t batVolWarn = GroBatWarn;
+	//24位数，对应十进制是8位，千万
+	char Digit[8];
+	
+	
+	Digit[0] = batVolWarn/10000000;
+	Digit[1] = (batVolWarn - Digit[0]*10000000)/1000000;
+	Digit[2] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000)/100000;
+	Digit[3] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000)/10000;
+	Digit[4] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000)/1000;
+	Digit[5] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000)/100;
+	Digit[6] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000 - Digit[5]*100)/10;
+	Digit[7] = (batVolWarn - Digit[0]*10000000 - Digit[1]*1000000 - Digit[2]*100000 - Digit[3]*10000 - Digit[4]*1000 - Digit[5]*100 - Digit[6]*10);
+	
+	//准备添加到html中的数据
+	for( i = 0; i < 8; i++) {
+		 *(pcInsert + + i) = (char)(Digit[i]+0x30); 
+	 }
+	
+}
+
+//SSIHandler中需要用到的处理其他告警值的函数
+void staWarn_Handler(char *pcInsert)
+{
+	int i;
+	
+	uint32_t TempVal = Temperature;//温度信息
+	uint32_t CurrVal = ChargeCurrentVal;//电流信息
+	uint8_t ConSVal = BSP_BAT_CAN_BAD_Num;//从机连接状态信息
+	//24位数，对应十进制是8位，千万
+	char Digit[15];
+	
+	
+	Digit[0] = TempVal/10000;
+	Digit[1] = (TempVal - Digit[0]*10000)/1000;
+	Digit[2] = (TempVal - Digit[0]*10000 - Digit[1]*1000)/100;
+	Digit[3] = (TempVal - Digit[0]*10000 - Digit[1]*1000 - Digit[2]*100)/10;
+	Digit[4] = (TempVal - Digit[0]*10000 - Digit[1]*1000 - Digit[2]*100 - Digit[3]*10);
+	
+	Digit[5] = CurrVal/10000;
+	Digit[6] = (CurrVal - Digit[5]*10000)/1000;
+	Digit[7] = (CurrVal - Digit[5]*10000 - Digit[6]*1000)/100;
+	Digit[8] = (CurrVal - Digit[5]*10000 - Digit[6]*1000 - Digit[7]*100)/10;
+	Digit[9] = (CurrVal - Digit[5]*10000 - Digit[6]*1000 - Digit[7]*100 - Digit[8]*10);
+	
+	Digit[10] = ConSVal/10000;
+	Digit[11] = (ConSVal - Digit[10]*10000)/1000;
+	Digit[12] = (ConSVal - Digit[10]*10000 - Digit[11]*1000)/100;
+	Digit[13] = (ConSVal - Digit[10]*10000 - Digit[11]*1000 - Digit[12]*100)/10;
+	Digit[14] = (ConSVal - Digit[10]*10000 - Digit[11]*1000 - Digit[12]*100 - Digit[13]*10);
+
+	//准备添加到html中的数据
+	for( i = 0; i < 15; i++) {
+		 *(pcInsert + + i) = (char)(Digit[i]+0x30); 
+	 }
 	
 }
 //SSI的Handler句柄
@@ -475,16 +544,22 @@ static u16_t SSIHandler(int iIndex,char *pcInsert,int iInsertLen)
 	switch(iIndex)
 	{
 		case 0: 
-				ADC_Handler(pcInsert);
+				volVal_Handler(pcInsert);
 				break;
 		case 1:
-				Temperate_Handler(pcInsert);
+				resVal_Handler(pcInsert);
 				break;
 		case 2:
-				RTCTime_Handler(pcInsert);
+				volWarn_Handler(pcInsert);
 				break;
 		case 3:
-				RTCdate_Handler(pcInsert);
+				resWarn_Handler(pcInsert);
+				break;
+		case 4:
+				otrWarn_Handler(pcInsert);
+				break;
+		case 5:
+				staWarn_Handler(pcInsert);
 				break;
 	}
 	return strlen(pcInsert);
@@ -542,6 +617,14 @@ const char *BEEP_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcV
 	else return "/STM32F407LED_OFF_BEEP_OFF.shtml";   //LED1关,BEEP关
 	
 }
+
+const char *login_CGI_Handler(int iIndex,int iNumParams,char *pcParam[],char *pcValue[])
+{
+	//在此处，可以进行参数的验证，此处略。在前端页面处理验证。
+	 return "/userinfo.shtml";  
+	
+}
+
 
 //SSI句柄初始化
 void httpd_ssi_init(void)

@@ -9,6 +9,9 @@
 	<style type="text/css">
 		body{ font-family: 'Microsoft YaHei';}
 		/*.panel-body{ padding: 0; }*/
+		#noDisplay{
+			display:none;
+		}
 	</style>
 </head>
 <body>
@@ -40,84 +43,140 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">电池电压</div>
 							<div class="panel-body">
-								<button type="button" id="vol01stat" class="btn btn-sm btn-success">#01</button>
-								<button type="button" id="vol01stat" class="btn btn-sm btn-success">#02</button>
-								<button type="button" class="btn btn-sm btn-success">#03</button>
-								<button type="button" class="btn btn-sm btn-success">#04</button>
-								<button type="button" class="btn btn-sm btn-success">#05</button>
-								<button type="button" class="btn btn-sm btn-success">#06</button>
-								<button type="button" class="btn btn-sm btn-success">#07</button>
-								<button type="button" class="btn btn-sm btn-success">#08</button>
-								<button type="button" class="btn btn-sm btn-success">#09</button>
-								<button type="button" class="btn btn-sm btn-success">#10</button>
-								<button type="button" class="btn btn-sm btn-success">#11</button>
-								<button type="button" class="btn btn-sm btn-success">#12</button>
-								<button type="button" class="btn btn-sm btn-success">#13</button>
-								<button type="button" class="btn btn-sm btn-success">#14</button>
-								<button type="button" class="btn btn-sm btn-success">#15</button>
-								<button type="button" class="btn btn-sm btn-success">#16</button>
-								<button type="button" class="btn btn-sm btn-success">#17</button>
-								<button type="button" class="btn btn-sm btn-success">#18</button>
-								<button type="button" class="btn btn-sm btn-success">#19</button>
-								<button type="button" class="btn btn-sm btn-success">#20</button>
-								<button type="button" class="btn btn-sm btn-danger">#21</button>
-								<button type="button" class="btn btn-sm btn-success">#22</button>
-								<button type="button" class="btn btn-sm btn-success">#23</button>
-								<button type="button" class="btn btn-sm btn-danger">#24</button>
+							<span class="label label-success" id="cus_vol_01stat">#01</span>
+							<span class="label label-success" id="cus_vol_02stat">#02</span>
+							<span class="label label-success" id="cus_vol_03stat">#03</span>
+							<span class="label label-success" id="cus_vol_04stat">#04</span>
+							<span class="label label-success" id="cus_vol_05stat">#05</span>
+							<span class="label label-success" id="cus_vol_06stat">#06</span>
+							<span class="label label-success" id="cus_vol_07stat">#07</span>
+							<span class="label label-success" id="cus_vol_08stat">#08</span>
+							<span class="label label-success" id="cus_vol_09stat">#09</span>
+							<span class="label label-success" id="cus_vol_10stat">#10</span>
+							<span class="label label-success" id="cus_vol_11stat">#11</span>
+							<span class="label label-success" id="cus_vol_12stat">#12</span>
+							<span class="label label-success" id="cus_vol_13stat">#13</span>
+							<span class="label label-success" id="cus_vol_14stat">#14</span>
+							<span class="label label-success" id="cus_vol_15stat">#15</span>
+							<span class="label label-success" id="cus_vol_16stat">#16</span>
+							<span class="label label-success" id="cus_vol_17stat">#17</span>
+							<span class="label label-success" id="cus_vol_18stat">#18</span>
+							<span class="label label-success" id="cus_vol_19stat">#19</span>
+							<span class="label label-success" id="cus_vol_20stat">#20</span>
+							<span class="label label-success" id="cus_vol_21stat">#21</span>
+							<span class="label label-success" id="cus_vol_22stat">#22</span>
+							<span class="label label-success" id="cus_vol_23stat">#23</span>
+							<span class="label label-success" id="cus_vol_24stat">#24</span>
+							<!-- 
+								<button type="button" id="cus_vol_01stat" class="btn btn-sm btn-success">#01</button>
+								<button type="button" id="cus_vol_02stat" class="btn btn-sm btn-success">#02</button>
+								<button type="button" id="cus_vol_03stat" class="btn btn-sm btn-success">#03</button>
+								<button type="button" id="cus_vol_04stat" class="btn btn-sm btn-success">#04</button>
+								<button type="button" id="cus_vol_05stat" class="btn btn-sm btn-success">#05</button>
+								<button type="button" id="cus_vol_06stat" class="btn btn-sm btn-success">#06</button>
+								<button type="button" id="cus_vol_07stat" class="btn btn-sm btn-success">#07</button>
+								<button type="button" id="cus_vol_08stat" class="btn btn-sm btn-success">#08</button>
+								<button type="button" id="cus_vol_09stat" class="btn btn-sm btn-success">#09</button>
+								<button type="button" id="cus_vol_10stat" class="btn btn-sm btn-success">#10</button>
+								<button type="button" id="cus_vol_11stat" class="btn btn-sm btn-success">#11</button>
+								<button type="button" id="cus_vol_12stat" class="btn btn-sm btn-success">#12</button>
+								<button type="button" id="cus_vol_13stat" class="btn btn-sm btn-success">#13</button>
+								<button type="button" id="cus_vol_14stat" class="btn btn-sm btn-success">#14</button>
+								<button type="button" id="cus_vol_15stat" class="btn btn-sm btn-success">#15</button>
+								<button type="button" id="cus_vol_16stat" class="btn btn-sm btn-success">#16</button>
+								<button type="button" id="cus_vol_17stat" class="btn btn-sm btn-success">#17</button>
+								<button type="button" id="cus_vol_18stat" class="btn btn-sm btn-success">#18</button>
+								<button type="button" id="cus_vol_19stat" class="btn btn-sm btn-success">#19</button>
+								<button type="button" id="cus_vol_20stat" class="btn btn-sm btn-success">#20</button>
+								<button type="button" id="cus_vol_21stat" class="btn btn-sm btn-success">#21</button>
+								<button type="button" id="cus_vol_22stat" class="btn btn-sm btn-success">#22</button>
+								<button type="button" id="cus_vol_23stat" class="btn btn-sm btn-success">#23</button>
+								<button type="button" id="cus_vol_24stat" class="btn btn-sm btn-success">#24</button>
+ -->
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">电池内阻</div>
 							<div class="panel-body">
-								<button type="button" class="btn btn-sm btn-success">#01</button>
-								<button type="button" class="btn btn-sm btn-success">#02</button>
-								<button type="button" class="btn btn-sm btn-success">#03</button>
-								<button type="button" class="btn btn-sm btn-success">#04</button>
-								<button type="button" class="btn btn-sm btn-success">#05</button>
-								<button type="button" class="btn btn-sm btn-success">#06</button>
-								<button type="button" class="btn btn-sm btn-success">#07</button>
-								<button type="button" class="btn btn-sm btn-success">#08</button>
-								<button type="button" class="btn btn-sm btn-success">#09</button>
-								<button type="button" class="btn btn-sm btn-success">#10</button>
-								<button type="button" class="btn btn-sm btn-success">#11</button>
-								<button type="button" class="btn btn-sm btn-success">#12</button>
-								<button type="button" class="btn btn-sm btn-success">#13</button>
-								<button type="button" class="btn btn-sm btn-success">#14</button>
-								<button type="button" class="btn btn-sm btn-success">#15</button>
-								<button type="button" class="btn btn-sm btn-success">#16</button>
-								<button type="button" class="btn btn-sm btn-success">#17</button>
-								<button type="button" class="btn btn-sm btn-success">#18</button>
-								<button type="button" class="btn btn-sm btn-success">#19</button>
-								<button type="button" class="btn btn-sm btn-success">#20</button>
-								<button type="button" class="btn btn-sm btn-danger">#21</button>
-								<button type="button" class="btn btn-sm btn-success">#22</button>
-								<button type="button" class="btn btn-sm btn-success">#23</button>
-								<button type="button" class="btn btn-sm btn-success">#24</button>
+								<span class="label label-success" id="cus_res_01stat">#01</span>
+								<span class="label label-success" id="cus_res_02stat">#02</span>
+								<span class="label label-success" id="cus_res_03stat">#03</span>
+								<span class="label label-success" id="cus_res_04stat">#04</span>
+								<span class="label label-success" id="cus_res_05stat">#05</span>
+								<span class="label label-success" id="cus_res_06stat">#06</span>
+								<span class="label label-success" id="cus_res_07stat">#07</span>
+								<span class="label label-success" id="cus_res_08stat">#08</span>
+								<span class="label label-success" id="cus_res_09stat">#09</span>
+								<span class="label label-success" id="cus_res_10stat">#10</span>
+								<span class="label label-success" id="cus_res_11stat">#11</span>
+								<span class="label label-success" id="cus_res_12stat">#12</span>
+								<span class="label label-success" id="cus_res_13stat">#13</span>
+								<span class="label label-success" id="cus_res_14stat">#14</span>
+								<span class="label label-success" id="cus_res_15stat">#15</span>
+								<span class="label label-success" id="cus_res_16stat">#16</span>
+								<span class="label label-success" id="cus_res_17stat">#17</span>
+								<span class="label label-success" id="cus_res_18stat">#18</span>
+								<span class="label label-success" id="cus_res_19stat">#19</span>
+								<span class="label label-success" id="cus_res_20stat">#20</span>
+								<span class="label label-success" id="cus_res_21stat">#21</span>
+								<span class="label label-success" id="cus_res_22stat">#22</span>
+								<span class="label label-success" id="cus_res_23stat">#23</span>
+								<span class="label label-success" id="cus_res_24stat">#24</span>
+							<!-- 	<button type="button" id="cus_res_01stat" class="btn btn-sm btn-success">#01</button>
+								<button type="button" id="cus_res_02stat" class="btn btn-sm btn-success">#02</button>
+								<button type="button" id="cus_res_03stat" class="btn btn-sm btn-success">#03</button>
+								<button type="button" id="cus_res_04stat" class="btn btn-sm btn-success">#04</button>
+								<button type="button" id="cus_res_05stat" class="btn btn-sm btn-success">#05</button>
+								<button type="button" id="cus_res_06stat" class="btn btn-sm btn-success">#06</button>
+								<button type="button" id="cus_res_07stat" class="btn btn-sm btn-success">#07</button>
+								<button type="button" id="cus_res_08stat" class="btn btn-sm btn-success">#08</button>
+								<button type="button" id="cus_res_09stat" class="btn btn-sm btn-success">#09</button>
+								<button type="button" id="cus_res_10stat" class="btn btn-sm btn-success">#10</button>
+								<button type="button" id="cus_res_11stat" class="btn btn-sm btn-success">#11</button>
+								<button type="button" id="cus_res_12stat" class="btn btn-sm btn-success">#12</button>
+								<button type="button" id="cus_res_13stat" class="btn btn-sm btn-success">#13</button>
+								<button type="button" id="cus_res_14stat" class="btn btn-sm btn-success">#14</button>
+								<button type="button" id="cus_res_15stat" class="btn btn-sm btn-success">#15</button>
+								<button type="button" id="cus_res_16stat" class="btn btn-sm btn-success">#16</button>
+								<button type="button" id="cus_res_17stat" class="btn btn-sm btn-success">#17</button>
+								<button type="button" id="cus_res_18stat" class="btn btn-sm btn-success">#18</button>
+								<button type="button" id="cus_res_19stat" class="btn btn-sm btn-success">#19</button>
+								<button type="button" id="cus_res_20stat" class="btn btn-sm btn-success">#20</button>
+								<button type="button" id="cus_res_21stat" class="btn btn-sm btn-success">#21</button>
+								<button type="button" id="cus_res_22stat" class="btn btn-sm btn-success">#22</button>
+								<button type="button" id="cus_res_23stat" class="btn btn-sm btn-success">#23</button>
+								<button type="button" id="cus_res_24stat" class="btn btn-sm btn-success">#24</button> -->
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">电池组工作电压</div>
 							<div class="panel-body">
-								<button type="button" class="btn btn-sm btn-primary">电池组</button>
+								<span class="label label-success" id="cus_Bat_gstat">电池组</span>
+								<!-- <button type="button" id="cus_Bat_gstat" class="btn btn-sm btn-success">电池组</button> -->
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">电池组充放电流</div>
 							<div class="panel-body">
-								<button type="button" class="btn btn-sm btn-success">充电</button>
-								<button type="button" class="btn btn-sm btn-success">放电</button>
+								<span class="label label-success" id="cus_char_stat">充电</span>
+								<span class="label label-success" id="cus_disc_stat">放电</span><!-- 
+								<button type="button" id="cus_char_stat" class="btn btn-sm btn-success">充电</button>
+								<button type="button" id="cus_disc_stat" class="btn btn-sm btn-success">放电</button> -->
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">电池组工作环境温度</div>
 							<div class="panel-body">
-								<button type="button" class="btn btn-sm btn-primary">温度</button>
+								<span class="label label-success" id="cus_env_temp">温度</span>
+								<!-- <button type="button" id="cus_env_temp" class="btn btn-sm btn-success">温度</button> -->
 							</div>
 						</div>
 
 						<span class="text">说明：</span>
-						<button type="button" class="btn btn-xs btn-danger">告警</button>
-						<button type="button" class="btn btn-xs btn-success">正常</button>
+						<span class="label label-success">正常</span>
+						<span class="label label-danger">告警</span>
+						<!-- <button type="button" class="btn btn-xs btn-danger">告警</button>
+						<button type="button" class="btn btn-xs btn-success">正常</button> -->
 					</div>
 				</div>
 			</div>
@@ -129,16 +188,69 @@
 			<center><span>&copy; 上海绿耳新能源科技有限公司</span></center>
 		</div>
 	</div>
+	<div id="noDisplay">
+		<p id="volWarn"><!--#x--></p>
+		<p id="resWarn"><!--#y--></p>
+		<p id="otrWarn"><!--#o--></p>
+	</div>
 	<script type="text/javascript">
-		var vol01 = 1;
-		var content_vol01 = document.getElementById("vol01stat");
-		if(vol01 == 1)
-		{
-			content_vol01.className = q.className.replace(/(?:^|\s)btn(?!\S)/g , 'btn btn-sm btn-danger');
+		var pElementVolWarn = document.getElementById("volWarn");
+		var volwarnVal = parseInt(pElementVolWarn.innerHTML.substr(9,8));
+		var pElementResWarn = document.getElementById("resWarn");
+		var reswarnVal = parseInt(pElementResWarn.innerHTML.substr(9,8));
+		var pElementOtrWarn = document.getElementById("otrWarn");
+		var otrwarnVal = parseInt(pElementOtrWarn.innerHTML.substr(9,8));
 
+		//process
+		for(var i = 1; i<33; i++)
+		{
+			if(volwarnVal & (1<<(i-1)))
+			{
+				if(i<10){
+				var strval= "cus_vol_0"+i+"stat";
+				}else{
+					var strval= "cus_vol_"+i+"stat";
+				}
+				document.getElementById(strval).className = document.getElementById(strval).className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');
+				console.log(document.getElementById(strval).className);
+			}
+			else
+				{;}
 		}
-		// document.getElementById("MyElement").className =
-  //  document.getElementById("MyElement").className
+
+		for(var i = 1; i<33; i++)
+		{
+			if(reswarnVal & (1<<(i-1)))
+			{
+				if(i<10){
+				var strval= "cus_res_0"+i+"stat";
+				}else{
+					var strval= "cus_res_"+i+"stat";
+				}
+				document.getElementById(strval).className = document.getElementById(strval).className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');
+			}
+			else
+				{;}
+			
+		}
+		if((otrwarnVal & (1<<0))||(otrwarnVal & (1<<1)))
+		{
+			document.getElementById("cus_Bat_gstat").className = document.getElementById("cus_Bat_gstat").className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');
+		}
+		if((otrwarnVal & (1<<2)))
+		{
+			document.getElementById("cus_char_stat").className = document.getElementById("cus_char_stat").className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');
+		}
+		if((otrwarnVal & (1<<3)))
+		{
+			document.getElementById("cus_disc_stat").className = document.getElementById("cus_disc_stat").className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');
+		}
+		if((otrwarnVal & (1<<4))||(otrwarnVal & (1<<5)))
+		{
+			document.getElementById("cus_env_temp").className = document.getElementById("cus_env_temp").className.replace(/(?:^|\s)label-success(?!\S)/g , ' label-danger');
+		}
+		else
+			{;}
 	</script>
 </body>
 </html>

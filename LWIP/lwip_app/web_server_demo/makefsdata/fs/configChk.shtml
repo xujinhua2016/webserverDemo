@@ -66,7 +66,7 @@
 	<!-- 尾部 -->
 	<div class="jumbotron" style=" margin-bottom:0;margin-top:100px;">
 		<div class="container">
-			<span>&copy; 上海绿耳新能源科技有限公司</span>
+			<center><span>&copy; 上海绿耳新能源科技有限公司</span></center>
 		</div>
 	</div>
 </body>

@@ -134,7 +134,7 @@
 		var content_vol01 = document.getElementById("vol01stat");
 		if(vol01 == 1)
 		{
-			content_vol01.className = q.className.replace(/(?:^|\s)btn(?!\S)/g , 'btn btn-sm btn-danger');
+			content_vol01.className = content_vol01.className.replace(/(?:^|\s)btn(?!\S)/g , 'btn btn-sm btn-danger');
 
 		}
 		// document.getElementById("MyElement").className =

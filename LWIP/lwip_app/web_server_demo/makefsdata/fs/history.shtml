@@ -95,31 +95,30 @@
 								</script>
 
 								<div id="div1">
-									<div id="res01" class="redcolor">01#</div>
-									<div id="res02" class="greencolor">02#</div>
-									<div id="res03" class="greencolor">03#</div>
-									<div id="res04" class="greencolor">04#</div>
-									<div id="res05" class="greencolor">05#</div>
-									<div id="res06" class="greencolor">06#</div>
-									<div id="res07" class="greencolor">07#</div>
-									<div id="res08" class="greencolor">08#</div>
-									<div id="res09" class="greencolor">09#</div>
-									<div id="res10" class="greencolor">10#</div>
-									<div id="res11" class="greencolor">11#</div>
-									<div id="res12" class="greencolor">12#</div>
-									<div id="res13" class="greencolor">13#</div>
-									<div id="res14" class="greencolor">14#</div>
-									<div id="res15" class="greencolor">15#</div>
-									<div id="res16" class="greencolor">16#</div>
-									<div id="res17" class="greencolor">17#</div>
-									<div id="res18" class="greencolor">18#</div>
-									<div id="res19" class="greencolor">19#</div>
-									<div id="res20" class="greencolor">20#</div>
-									<div id="res21" class="greencolor">21#</div>
-									<div id="res22" class="greencolor">22#</div>
-									<div id="res23" class="greencolor">23#</div>
-									<div id="res24" class="greencolor">24#</div>
-									<span>&nbsp</span>
+									<button type="button" id="vol01stat" class="btn btn-sm btn-danger">#01</button>
+									<button type="button" id="vol02stat" class="btn btn-sm btn-success">#02</button>
+									<button type="button" class="btn btn-sm btn-success">#03</button>
+									<button type="button" class="btn btn-sm btn-success">#04</button>
+									<button type="button" class="btn btn-sm btn-success">#05</button>
+									<button type="button" class="btn btn-sm btn-success">#06</button>
+									<button type="button" class="btn btn-sm btn-success">#07</button>
+									<button type="button" class="btn btn-sm btn-success">#08</button>
+									<button type="button" class="btn btn-sm btn-success">#09</button>
+									<button type="button" class="btn btn-sm btn-success">#10</button>
+									<button type="button" class="btn btn-sm btn-success">#11</button>
+									<button type="button" class="btn btn-sm btn-success">#12</button>
+									<button type="button" class="btn btn-sm btn-success">#13</button>
+									<button type="button" class="btn btn-sm btn-success">#14</button>
+									<button type="button" class="btn btn-sm btn-success">#15</button>
+									<button type="button" class="btn btn-sm btn-success">#16</button>
+									<button type="button" class="btn btn-sm btn-success">#17</button>
+									<button type="button" class="btn btn-sm btn-success">#18</button>
+									<button type="button" class="btn btn-sm btn-success">#19</button>
+									<button type="button" class="btn btn-sm btn-success">#20</button>
+									<button type="button" class="btn btn-sm btn-success">#21</button>
+									<button type="button" class="btn btn-sm btn-success">#22</button>
+									<button type="button" class="btn btn-sm btn-success">#23</button>
+									<button type="button" class="btn btn-sm btn-success">#24</button>
 								</div>
 
 							</div>
